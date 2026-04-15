@@ -1,106 +1,350 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>网站维护中 - 稍后回来</title>
-    <style>
-        /* 全局重置 */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        /* 页面主体样式 */
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); /* 渐变背景 */
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #333;
-        }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第一个中文一级域名</title>
+<link href="BlogPostAssets/styles/blogPostStyle.css" rel="stylesheet" type="text/css">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<!-- Adobe Edge Web Fonts 保持不变 -->
+<script>var __adobewebfontsappname__="dreamweaver"</script>
+<script src="http://use.edgefonts.net/montserrat:n4:default;source-sans-pro:n2:default.js" type="text/javascript"></script>
 
-        /* 卡片容器 */
-        .container {
-            background: #fff;
-            padding: 3rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 500px;
-            width: 90%;
-            animation: fadeIn 1s ease-in; /* 淡入动画 */
-        }
+<!-- 实时时钟插件样式 + 右上角紧凑布局重写 -->
+<style>
+  /* 基础时钟卡片样式 (用于右上角紧凑版) */
+  .clock-plugin-corner {
+    background: rgba(15, 25, 45, 0.85);
+    backdrop-filter: blur(12px);
+    border-radius: 2rem;
+    border: 1px solid rgba(72, 187, 255, 0.4);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2), 0 0 0 0.5px rgba(72, 187, 255, 0.2) inset;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', 'SF Pro Text', 'PingFang SC', system-ui, sans-serif;
+    min-width: 240px;
+  }
+  .clock-plugin-corner:hover {
+    transform: translateY(-2px);
+    border-color: rgba(0, 212, 255, 0.6);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+  }
+  /* 右上角内部布局：上下分层，但紧凑 */
+  .corner-date {
+    font-size: 0.7rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    color: #ccf0ff;
+    border-bottom: 1px dashed rgba(100, 180, 250, 0.4);
+    padding-bottom: 4px;
+    margin-bottom: 6px;
+  }
+  .corner-full-date {
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    background: rgba(255,255,255,0.05);
+    padding: 0 6px;
+    border-radius: 20px;
+  }
+  .corner-weekday {
+    background: linear-gradient(145deg, #2c4c7c, #123256);
+    padding: 0 8px;
+    border-radius: 30px;
+    font-size: 0.65rem;
+    color: #c4e2ff;
+  }
+  .corner-time {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 4px;
+    margin: 6px 0 4px;
+  }
+  .corner-hour-minute {
+    font-size: 1.7rem;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    background: linear-gradient(135deg, #FFFFFF, #b0e0ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: 2px;
+  }
+  .corner-separator {
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: #4eb5ff;
+    animation: softPulse 1.2s infinite ease;
+    line-height: 1;
+  }
+  .corner-seconds {
+    font-size: 1rem;
+    font-weight: 500;
+    background: linear-gradient(145deg, #cceeff, #6db3ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-left: 2px;
+  }
+  .corner-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.65rem;
+    color: #bbd9ff;
+    margin-top: 5px;
+    border-top: 1px solid rgba(72, 187, 255, 0.3);
+    padding-top: 5px;
+  }
+  .corner-timezone {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-family: monospace;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .live-dot-small {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #2effb0;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #00ffaa;
+    animation: blinkLive 1.2s infinite;
+    margin-right: 4px;
+  }
+  @keyframes softPulse {
+    0% { opacity: 0.7; text-shadow: 0 0 2px #0080ff;}
+    100% { opacity: 1; text-shadow: 0 0 8px #4aaeff;}
+  }
+  @keyframes blinkLive {
+    0% { opacity: 0.3; transform: scale(0.8);}
+    100% { opacity: 1; transform: scale(1.1);}
+  }
 
-        /* 图标样式 */
-        .icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            display: inline-block;
-            animation: spin 4s linear infinite; /* 旋转动画 */
-        }
+  /* 调整 header 布局: 让 logo 在左, nav 和 时钟在右 */
+  header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem 1.5rem;
+    background: inherit; /* 保持原背景, 不破坏原有设计 */
+  }
+  #logo {
+    flex-shrink: 0;
+  }
+  nav {
+    display: flex;
+    gap: 1.2rem;
+    margin-left: auto;
+    margin-right: 1.5rem;
+  }
+  .corner-clock-container {
+    flex-shrink: 0;
+  }
+  /* 响应式: 屏幕过小时时钟换行 */
+  @media (max-width: 780px) {
+    header {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+    }
+    nav {
+      margin-left: 0;
+      justify-content: center;
+    }
+    .corner-clock-container {
+      align-self: flex-end;
+    }
+  }
+  @media (max-width: 550px) {
+    .clock-plugin-corner {
+      min-width: 200px;
+      padding: 0.4rem 0.8rem;
+    }
+    .corner-hour-minute {
+      font-size: 1.3rem;
+    }
+    .corner-separator {
+      font-size: 1.3rem;
+    }
+    .corner-seconds {
+      font-size: 0.85rem;
+    }
+  }
+</style>
 
-        /* 标题 */
-        h1 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: #2c3e50;
-        }
-
-        /* 描述文字 */
-        p {
-            font-size: 1rem;
-            line-height: 1.6;
-            color: #666;
-            margin-bottom: 2rem;
-        }
-
-        /* 底部小字 */
-        .footer {
-            font-size: 0.8rem;
-            color: #999;
-            margin-top: 2rem;
-        }
-
-        /* 动画定义 */
-        @keyframes spin { 
-            0% { transform: rotate(0deg); } 
-            100% { transform: rotate(360deg); } 
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* 移动端适配 */
-        @media (max-width: 480px) {
-            .container { padding: 2rem; }
-            h1 { font-size: 1.5rem; }
-        }
-    </style>
 </head>
+
 <body>
-
-    <div class="container">
-        <!-- 这里是一个 SVG 齿轮图标 -->
-        <div class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#3498db" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="3"></circle>
-                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-            </svg>
+<div id="mainwrapper">
+  <header> 
+    <div id="logo"><img src="BlogPostAssets/images/logo.png" alt="sample logo" width="42"></div>
+    <p class="corner-hour-minute">return 0 已停止思考</p>
+    <!-- 右上角实时时钟插件 容器 -->
+    <div class="corner-clock-container">
+      <div class="clock-plugin-corner" id="liveClockCorner">
+        <div class="corner-date">
+          <span class="corner-full-date" id="cornerDate">加载中...</span>
+          <span class="corner-weekday" id="cornerWeekday">---</span>
         </div>
-
-        <h1>网站升级维护中</h1>
-        <p>
-            我们要暂时离开一会儿进行系统升级。<br>
-            为了给您提供更好的体验，我们正在努力优化网站。<br>
-            请稍后再回来看看！
-        </p>
-        
-        <div class="footer">
-            &copy; 2026 你的网站名称. 保留所有权利。
+        <div class="corner-time">
+          <span class="corner-hour-minute" id="cornerHourMinute">--:--</span>
+          <span class="corner-separator">:</span>
+          <span class="corner-seconds" id="cornerSeconds">--</span>
         </div>
+        <div class="corner-footer">
+          <span class="corner-timezone" id="cornerTimezone">🌍 时区</span>
+          <span><span class="live-dot-small"></span>实时</span>
+        </div>
+      </div>
     </div>
+  </header>
+  <div id="content">
+    <div class="notOnDesktop"> 
+      <!-- 移动端搜索框 -->
+      <input type="text" placeholder="Search">
+    </div>
+    <section id="mainContent"> 
+      <h1>首个中文域名</h1>
+      <h3>只买得起一年😓</h3>
+      <div id="bannerImage"><img src="BlogPostAssets/images/SliderLayerImage.png" alt="" width="1000" height="490"/></div>
+      <p>这么好的域名竟然只要5.8一年！ </p>
+      <p>你甚至能免费看到这个</p>
+      <p>这太不可思议了😱&nbsp;</p>
+      
+      <!-- 作者信息区域 -->
+      <aside id="authorInfo"> 
+        <h2>Shiorko</h2>
+        <p>© 2026 Shiorko. All rights reserved.</p>
+        <p>Copyright © 2026 Shiorko. 保留所有权利。</p>
+      </aside>
+    </section>
+    <section id="sidebar"> 
+      <!-- 侧边栏内容 -->
+      <input type="text" placeholder="OMG 何意味">
+      <div id="adimage"><img src="BlogPostAssets/images/dog.gif" alt=""/></div>
+      <nav>
+        <ul>
+          <li><a href="#" title="Link">后续会加上别的东西</a></li>
+          <li><a href="#" title="Link"></a></li>
+          <li><a href="#" title="Link"></a></li>
+          <li><a href="#" title="Link"></a></li>
+          <li><a href="#" title="Link"></a></li>
+          <li><a href="#" title="Link"></a></li>
+        </ul>
+      </nav>
+    </section>
+    <footer> 
+      <article>
+        <h3>迪克期刊&nbsp;</h3>
+        <p>Dick Journal</p>
+        <p>Digital Innovation &amp; Collaborative Key</p>
+        <p>&nbsp;<a href="https://dick.shiorko.dpdns.org/" style="color:red">点我跳转</a></p>
+      </article>
+      <article>
+        <h3>主要介绍&nbsp;</h3>
+        <p>关于服务器配置和别的什么信息</p>
+        <p><a href="https://explanation.shiorko.dpdns.org/" style="color: rgba(0,233,255,1)">点我前往</a>&nbsp;</p>
+      </article>
+    </footer>
+  </div>
+  <div id="footerbar"></div>
+</div>
 
+<!-- 实时时钟脚本 (紧凑右上角版，每秒更新) -->
+<script>
+(function() {
+    // 获取右上角时钟各元素
+    const cornerDateElem = document.getElementById('cornerDate');
+    const cornerWeekdayElem = document.getElementById('cornerWeekday');
+    const cornerHourMinuteElem = document.getElementById('cornerHourMinute');
+    const cornerSecondsElem = document.getElementById('cornerSeconds');
+    const cornerTimezoneElem = document.getElementById('cornerTimezone');
+
+    // 辅助函数
+    function padZero(num) {
+        return num < 10 ? '0' + num : String(num);
+    }
+
+    const weekdaysCN = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+
+    function getFormattedDate(date) {
+        const year = date.getFullYear();
+        const month = padZero(date.getMonth() + 1);
+        const day = padZero(date.getDate());
+        return `${year}/${month}/${day}`;
+    }
+
+    function getWeekday(date) {
+        return weekdaysCN[date.getDay()];
+    }
+
+    function getHourMinute(date) {
+        return `${padZero(date.getHours())}:${padZero(date.getMinutes())}`;
+    }
+
+    function getSeconds(date) {
+        return padZero(date.getSeconds());
+    }
+
+    function getLocalTimeZoneShort() {
+        try {
+            const timeZoneName = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            if (timeZoneName) {
+                const offset = -new Date().getTimezoneOffset() / 60;
+                const sign = offset >= 0 ? '+' : '';
+                let offsetStr = `UTC${sign}${Math.abs(offset)}`;
+                if (offset % 1 !== 0) {
+                    const hours = Math.floor(Math.abs(offset));
+                    const mins = Math.abs((offset % 1) * 60);
+                    offsetStr = `UTC${sign}${hours}:${padZero(mins)}`;
+                }
+                let shortZone = timeZoneName.split('/').pop().replace(/_/g, ' ');
+                if (shortZone === 'Shanghai' || shortZone === 'Beijing') shortZone = '中国';
+                return `${shortZone} ${offsetStr}`;
+            } else {
+                const offset = -new Date().getTimezoneOffset();
+                const hours = Math.floor(Math.abs(offset) / 60);
+                const mins = Math.abs(offset) % 60;
+                const sign = offset >= 0 ? '+' : '-';
+                return `本地 UTC${sign}${padZero(hours)}:${padZero(mins)}`;
+            }
+        } catch(e) {
+            return "本地时区";
+        }
+    }
+
+    // 更新右上角时钟
+    function updateCornerClock() {
+        const now = new Date();
+        if (cornerDateElem) cornerDateElem.textContent = getFormattedDate(now);
+        if (cornerWeekdayElem) cornerWeekdayElem.textContent = getWeekday(now);
+        if (cornerHourMinuteElem) cornerHourMinuteElem.textContent = getHourMinute(now);
+        if (cornerSecondsElem) cornerSecondsElem.textContent = getSeconds(now);
+    }
+
+    // 设置时区 (只需一次)
+    if (cornerTimezoneElem) {
+        cornerTimezoneElem.innerHTML = `🌐 ${getLocalTimeZoneShort()}`;
+    }
+
+    // 立即更新
+    updateCornerClock();
+    // 每秒刷新
+    let intervalId = setInterval(updateCornerClock, 1000);
+
+    // 页面关闭时清理定时器
+    window.addEventListener('beforeunload', function() {
+        if (intervalId) clearInterval(intervalId);
+    });
+})();
+</script>
 </body>
 </html>
