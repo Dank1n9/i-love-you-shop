@@ -1,906 +1,350 @@
-<!DOCTYPE html>
-<html lang="zh">
+<!doctype html>
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-  <title>我喜欢你 · 心意小铺 | 加密心意 · 仪式感收礼</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第一个中文一级域名</title>
+<link href="BlogPostAssets/styles/blogPostStyle.css" rel="stylesheet" type="text/css">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<!-- Adobe Edge Web Fonts 保持不变 -->
+<script>var __adobewebfontsappname__="dreamweaver"</script>
+<script src="http://use.edgefonts.net/montserrat:n4:default;source-sans-pro:n2:default.js" type="text/javascript"></script>
 
-    body {
-      font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(145deg, #fff5f8 0%, #ffeef2 100%);
-      color: #3e2a2f;
-      line-height: 1.5;
-      min-height: 100vh;
-      display: flex;
+<!-- 实时时钟插件样式 + 右上角紧凑布局重写 -->
+<style>
+  /* 基础时钟卡片样式 (用于右上角紧凑版) */
+  .clock-plugin-corner {
+    background: rgba(15, 25, 45, 0.85);
+    backdrop-filter: blur(12px);
+    border-radius: 2rem;
+    border: 1px solid rgba(72, 187, 255, 0.4);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2), 0 0 0 0.5px rgba(72, 187, 255, 0.2) inset;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', 'SF Pro Text', 'PingFang SC', system-ui, sans-serif;
+    min-width: 240px;
+  }
+  .clock-plugin-corner:hover {
+    transform: translateY(-2px);
+    border-color: rgba(0, 212, 255, 0.6);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+  }
+  /* 右上角内部布局：上下分层，但紧凑 */
+  .corner-date {
+    font-size: 0.7rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    color: #ccf0ff;
+    border-bottom: 1px dashed rgba(100, 180, 250, 0.4);
+    padding-bottom: 4px;
+    margin-bottom: 6px;
+  }
+  .corner-full-date {
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    background: rgba(255,255,255,0.05);
+    padding: 0 6px;
+    border-radius: 20px;
+  }
+  .corner-weekday {
+    background: linear-gradient(145deg, #2c4c7c, #123256);
+    padding: 0 8px;
+    border-radius: 30px;
+    font-size: 0.65rem;
+    color: #c4e2ff;
+  }
+  .corner-time {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 4px;
+    margin: 6px 0 4px;
+  }
+  .corner-hour-minute {
+    font-size: 1.7rem;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    background: linear-gradient(135deg, #FFFFFF, #b0e0ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: 2px;
+  }
+  .corner-separator {
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: #4eb5ff;
+    animation: softPulse 1.2s infinite ease;
+    line-height: 1;
+  }
+  .corner-seconds {
+    font-size: 1rem;
+    font-weight: 500;
+    background: linear-gradient(145deg, #cceeff, #6db3ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-left: 2px;
+  }
+  .corner-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.65rem;
+    color: #bbd9ff;
+    margin-top: 5px;
+    border-top: 1px solid rgba(72, 187, 255, 0.3);
+    padding-top: 5px;
+  }
+  .corner-timezone {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-family: monospace;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .live-dot-small {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #2effb0;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #00ffaa;
+    animation: blinkLive 1.2s infinite;
+    margin-right: 4px;
+  }
+  @keyframes softPulse {
+    0% { opacity: 0.7; text-shadow: 0 0 2px #0080ff;}
+    100% { opacity: 1; text-shadow: 0 0 8px #4aaeff;}
+  }
+  @keyframes blinkLive {
+    0% { opacity: 0.3; transform: scale(0.8);}
+    100% { opacity: 1; transform: scale(1.1);}
+  }
+
+  /* 调整 header 布局: 让 logo 在左, nav 和 时钟在右 */
+  header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem 1.5rem;
+    background: inherit; /* 保持原背景, 不破坏原有设计 */
+  }
+  #logo {
+    flex-shrink: 0;
+  }
+  nav {
+    display: flex;
+    gap: 1.2rem;
+    margin-left: auto;
+    margin-right: 1.5rem;
+  }
+  .corner-clock-container {
+    flex-shrink: 0;
+  }
+  /* 响应式: 屏幕过小时时钟换行 */
+  @media (max-width: 780px) {
+    header {
       flex-direction: column;
-    }
-
-    .browser-mock {
-      background: #f9e6eb;
-      padding: 10px 20px;
-      border-bottom: 1px solid #ffccd5;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      backdrop-filter: blur(4px);
-      background: rgba(255, 240, 245, 0.7);
-    }
-
-    .browser-dot {
-      display: flex;
-      gap: 8px;
-      margin-right: 12px;
-    }
-
-    .browser-dot span {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: #ffb3c1;
-    }
-
-    .browser-url {
-      background: white;
-      padding: 6px 18px;
-      border-radius: 40px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #a13d4b;
-      box-shadow: inset 0 1px 3px rgba(0,0,0,0.03), 0 2px 4px rgba(255,140,160,0.1);
-      border: 1px solid #ffd9e0;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex: 1 1 auto;
-      max-width: 500px;
-    }
-
-    .browser-url i { color: #2ecc71; font-size: 0.8rem; }
-    .lock-icon { margin-right: 4px; color: #27ae60; }
-
-    .wrapper {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 24px;
-      width: 100%;
-      flex: 1;
-    }
-
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 0 12px;
-      flex-wrap: wrap;
-      border-bottom: 1px dashed #fbb1c2;
-    }
-
-    .logo {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #b3405a;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-    }
-
-    .logo i {
-      font-size: 2rem;
-      color: #e8436e;
-      filter: drop-shadow(0 4px 6px rgba(232, 67, 110, 0.2));
-    }
-
-    .logo span {
-      background: linear-gradient(135deg, #c44569, #a52d4e);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      font-weight: 600;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: #62343e;
-      font-size: 1.1rem;
-      transition: all 0.2s;
-      padding-bottom: 4px;
-      border-bottom: 2px solid transparent;
-      cursor: pointer;
-    }
-
-    .nav-links a:hover, .nav-links a.active {
-      border-bottom-color: #e8436e;
-      color: #b32e4a;
-    }
-
-    .nav-actions i {
-      font-size: 1.4rem;
-      color: #a23e55;
-      cursor: pointer;
-      transition: transform 0.2s;
-      margin-left: 16px;
-    }
-
-    .hero {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      padding: 40px 0 30px;
-    }
-
-    .hero-content { flex: 1 1 350px; }
-    .hero-badge {
-      background: #ffd9e2;
-      color: #a1304a;
-      display: inline-block;
-      padding: 6px 18px;
-      border-radius: 40px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      margin-bottom: 20px;
-      backdrop-filter: blur(5px);
-      border: 1px solid #ffb7c7;
-    }
-
-    .hero-content h1 {
-      font-size: 3.3rem;
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 20px;
-      color: #391c24;
-    }
-
-    .hero-highlight {
-      background: linear-gradient(120deg, #fce4e9 0%, #fce4e9 70%);
-      padding: 0 10px;
-      display: inline-block;
-      border-radius: 12px;
-      color: #ac2f4c;
-    }
-
-    .hero-desc {
-      font-size: 1.2rem;
-      margin-bottom: 30px;
-      color: #704e58;
-      max-width: 500px;
-    }
-
-    .btn-group {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      background: #d9456a;
-      border: none;
-      padding: 14px 32px;
-      border-radius: 60px;
-      color: white;
-      font-weight: 700;
-      font-size: 1.1rem;
-      box-shadow: 0 12px 18px -8px rgba(217, 69, 106, 0.3);
-      cursor: pointer;
-      transition: all 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .btn-primary:hover {
-      background: #c13b5e;
-      transform: translateY(-3px);
-    }
-
-    .btn-outline {
-      background: transparent;
-      border: 1.5px solid #c44569;
-      padding: 14px 28px;
-      border-radius: 60px;
-      color: #c44569;
-      font-weight: 600;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: 0.2s;
-      backdrop-filter: blur(8px);
-    }
-
-    .btn-outline:hover {
-      background: #c44569;
-      color: white;
-    }
-
-    .floating-heart {
-      font-size: 12rem;
-      color: #f28d9e;
-      opacity: 0.9;
-      filter: drop-shadow(0 20px 25px #f9acbc);
-      animation: float 4s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-12px); }
-      100% { transform: translateY(0px); }
-    }
-
-    .section-title {
-      font-size: 2.3rem;
-      margin: 50px 0 30px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: #45262f;
-    }
-
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 30px;
-    }
-
-    .product-card {
-      background: rgba(255, 255, 255, 0.65);
-      backdrop-filter: blur(12px);
-      border-radius: 32px;
-      padding: 28px 20px 24px;
-      box-shadow: 0 20px 35px -8px rgba(201, 100, 120, 0.15);
-      border: 1px solid #ffe3e9;
-      transition: all 0.3s;
-      text-align: center;
-    }
-
-    .product-card:hover {
-      transform: translateY(-8px);
-      background: rgba(255, 250, 252, 0.8);
-      box-shadow: 0 28px 40px -10px #e78da2;
-      border-color: #ffb7c7;
-    }
-
-    .product-icon {
-      font-size: 3.5rem;
-      background: #ffe2e9;
-      width: 90px;
-      height: 90px;
-      line-height: 90px;
-      text-align: center;
-      border-radius: 30px;
-      margin: 0 auto 20px;
-      color: #b33a56;
-      box-shadow: 0 8px 0 #fec7d3;
-    }
-
-    .product-card h3 {
-      font-size: 1.6rem;
-      margin-bottom: 10px;
-      color: #3e1e28;
-    }
-
-    .price {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #b83b5c;
-      margin: 15px 0 10px;
-    }
-
-    .card-btn {
-      background: white;
-      border: 1.5px solid #e0728f;
-      color: #b13b58;
-      padding: 12px 22px;
-      border-radius: 50px;
-      font-weight: 600;
-      width: 100%;
-      cursor: pointer;
-      transition: 0.2s;
-      font-size: 1rem;
-      margin-top: 6px;
-    }
-
-    .card-btn:hover {
-      background: #c44569;
-      color: white;
-      border-color: #c44569;
-    }
-
-    .story-block {
-      display: flex;
-      flex-wrap: wrap;
-      background: rgba(255, 225, 235, 0.5);
-      backdrop-filter: blur(8px);
-      border-radius: 48px;
-      padding: 40px 36px;
-      margin: 60px 0 40px;
-      align-items: center;
-      border: 1px solid #ffd2dd;
-    }
-
-    .story-text { flex: 2 1 280px; }
-    .story-text h2 {
-      font-size: 2.2rem;
-      margin-bottom: 16px;
-      color: #42222e;
-    }
-
-    .story-highlight {
-      background: #ffecf0;
-      border-radius: 28px;
-      padding: 20px 24px;
-      font-style: italic;
-      border-left: 6px solid #e8436e;
-    }
-
-    .footer {
-      margin-top: 40px;
-      padding: 30px 0 20px;
-      border-top: 1px solid #fec7d3;
-      text-align: center;
-      color: #764c59;
-    }
-
-    /* ========= 通用模态框样式 ========= */
-    .modal-overlay {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.3);
-      backdrop-filter: blur(12px);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    .modal-card {
-      background: #fff9fb;
-      max-width: 480px;
-      width: 90%;
-      border-radius: 56px;
-      padding: 30px 28px 36px;
-      box-shadow: 0 40px 70px -12px rgba(160, 50, 80, 0.4);
-      border: 2px solid #ffb7c7;
-      text-align: center;
-      animation: popIn 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
-      position: relative;
-    }
-
-    @keyframes popIn {
-      0% { transform: scale(0.85); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    /* 礼物未拆封视图 */
-    .gift-closed {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 18px;
-    }
-    .gift-box-icon {
-      font-size: 5rem;
-      color: #e8436e;
-      animation: gentleShake 2s infinite ease;
-      background: #ffe2e9;
-      width: 120px;
-      height: 120px;
-      line-height: 120px;
-      border-radius: 40px;
-      margin: 0 auto;
-      box-shadow: 0 15px 20px rgba(232,67,110,0.2);
-    }
-    @keyframes gentleShake {
-      0%,100%{ transform: rotate(0deg); }
-      25%{ transform: rotate(3deg); }
-      75%{ transform: rotate(-3deg); }
-    }
-    .gift-closed .sender-name {
-      font-size: 1.5rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, #b3405a, #e8738f);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-top: 8px;
-    }
-    .open-gift-btn {
-      background: #d9456a;
-      border: none;
-      padding: 14px 32px;
-      border-radius: 60px;
-      color: white;
-      font-weight: bold;
-      font-size: 1.2rem;
-      cursor: pointer;
-      transition: 0.2s;
-      box-shadow: 0 6px 14px rgba(217,69,106,0.3);
-      display: inline-flex;
-      align-items: center;
+      align-items: stretch;
       gap: 12px;
     }
-    .open-gift-btn:hover {
-      background: #bb3b5c;
-      transform: scale(1.02);
-    }
-
-    /* 礼物开启后视图 */
-    .gift-opened {
-      display: none;
-      flex-direction: column;
-      gap: 18px;
-      animation: revealContent 0.6s ease-out;
-    }
-    @keyframes revealContent {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    .gift-icon-large {
-      font-size: 4rem;
-      background: #ffeef2;
-      width: 100px;
-      height: 100px;
-      line-height: 100px;
-      border-radius: 50px;
-      margin: 0 auto;
-      color: #b83b5c;
-      box-shadow: 0 5px 0 #ffccd5;
-    }
-    .gift-name-display {
-      font-size: 2rem;
-      font-weight: 800;
-      color: #b3405a;
-    }
-    .gift-message-display {
-      background: #fff0f5;
-      padding: 16px;
-      border-radius: 36px;
-      font-size: 1.1rem;
-      font-style: italic;
-      color: #572c38;
-      border-left: 5px solid #e8436e;
-    }
-    .gift-footer-buttons {
-      display: flex;
-      gap: 14px;
+    nav {
+      margin-left: 0;
       justify-content: center;
-      margin-top: 12px;
     }
-    .btn-secondary {
-      background: #ffe2e9;
-      color: #b13b58;
-      border: 1px solid #ffb7c7;
-      padding: 10px 22px;
-      border-radius: 40px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.2s;
+    .corner-clock-container {
+      align-self: flex-end;
     }
-    .btn-secondary:hover {
-      background: #f8ced9;
+  }
+  @media (max-width: 550px) {
+    .clock-plugin-corner {
+      min-width: 200px;
+      padding: 0.4rem 0.8rem;
     }
+    .corner-hour-minute {
+      font-size: 1.3rem;
+    }
+    .corner-separator {
+      font-size: 1.3rem;
+    }
+    .corner-seconds {
+      font-size: 0.85rem;
+    }
+  }
+</style>
 
-    /* ========= 留言模态框样式 (统一圆润风格) ========= */
-    #messageModal .modal-card {
-      max-width: 450px;
-      padding: 32px 28px;
-    }
-    #messageModal h2 {
-      font-size: 1.9rem;
-      margin: 12px 0 8px;
-      color: #b3405a;
-    }
-    #messageModal label {
-      display: block;
-      text-align: left;
-      font-weight: 600;
-      color: #b13b58;
-      margin: 16px 0 6px 8px;
-      font-size: 0.95rem;
-    }
-    #messageModal textarea,
-    #messageModal input {
-      width: 100%;
-      padding: 14px 18px;
-      border-radius: 60px;
-      border: 1.5px solid #ffccd5;
-      background: #fffafc;
-      font-family: 'Quicksand', sans-serif;
-      font-size: 1rem;
-      transition: all 0.2s;
-      resize: vertical;
-      outline: none;
-    }
-    #messageModal textarea {
-      border-radius: 32px;
-      resize: vertical;
-    }
-    #messageModal textarea:focus,
-    #messageModal input:focus {
-      border-color: #e8436e;
-      box-shadow: 0 0 0 3px rgba(232,67,110,0.1);
-    }
-    /* 按钮组样式与主站统一 */
-    #messageModal .modal-close-btn {
-      background: #d9456a;
-      border: none;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 60px;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: 0.2s;
-      flex: 1;
-      margin: 0 4px;
-    }
-    #messageModal .modal-close-btn:first-child {
-      background: #c44569;
-    }
-    #messageModal .modal-close-btn:first-child:hover {
-      background: #a93454;
-      transform: translateY(-2px);
-    }
-    #messageModal .modal-close-btn:last-child {
-      background: #e2b1c0;
-      color: #5c2e3a;
-    }
-    #messageModal .modal-close-btn:last-child:hover {
-      background: #d49aac;
-      transform: translateY(-2px);
-    }
-    #messageModal .modal-card i.fa-pen-heart {
-      font-size: 3.2rem;
-      color: #e8436e;
-      background: #ffe2e9;
-      padding: 12px;
-      border-radius: 60px;
-      margin-bottom: 8px;
-    }
-
-    /* 其他辅助 */
-    .toast-message {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #2d1e24;
-      color: #ffe3e9;
-      padding: 12px 24px;
-      border-radius: 60px;
-      font-weight: 500;
-      z-index: 1100;
-      opacity: 0;
-      transition: opacity 0.2s;
-      pointer-events: none;
-      white-space: nowrap;
-    }
-    .confetti-heart {
-      position: fixed;
-      pointer-events: none;
-      font-size: 1.6rem;
-      animation: heartRain 1.2s ease-out forwards;
-      z-index: 2000;
-    }
-    @keyframes heartRain {
-      0% { transform: translateY(0) scale(0.6); opacity: 1; }
-      100% { transform: translateY(-100px) scale(1.2); opacity: 0; }
-    }
-    .info-panel {
-      background: rgba(255,240,245,0.9);
-      border-radius: 40px;
-      padding: 28px;
-      margin: 20px 0;
-      display: none;
-    }
-    @media (max-width: 700px) {
-      .navbar { flex-direction: column; gap: 12px; }
-      .hero-content h1 { font-size: 2.5rem; }
-      .modal-card { padding: 24px 20px; }
-      #messageModal .modal-close-btn { padding: 10px 16px; font-size: 0.9rem; }
-    }
-  </style>
 </head>
+
 <body>
-
-<div class="browser-mock">
-  <div class="browser-dot"><span></span><span></span><span></span></div>
-  <div class="browser-url"><i class="fas fa-lock lock-icon"></i><span>https://我喜欢你.shop</span><i class="fas fa-star" style="margin-left: auto; color:#f5b042;"></i></div>
-  <div><i class="fas fa-wifi" style="color:#b36b7c;"></i><i class="fas fa-battery-three-quarters" style="color:#b36b7c; margin-left:8px;"></i></div>
-</div>
-
-<div class="wrapper">
-  <nav class="navbar">
-    <div class="logo" onclick="scrollToTop()"><i class="fas fa-heart"></i><span>我喜欢你.shop</span></div>
-    <div class="nav-links">
-      <a class="nav-item active" data-page="home">首页</a>
-      <a class="nav-item" data-page="gifts">心意礼</a>
-      <a class="nav-item" data-page="story">故事</a>
-      <a class="nav-item" data-page="about">关于</a>
-    </div>
-    <div class="nav-actions"><i class="fas fa-search"></i><i class="fas fa-shopping-bag"></i><i class="fas fa-user-circle"></i></div>
-  </nav>
-
-  <div id="panel-home" class="content-panel">
-    <section class="hero">
-      <div class="hero-content">
-        <div class="hero-badge"><i class="fas fa-gift"></i> 母情节限定 · 甜蜜加倍</div>
-        <h1>把 <span class="hero-highlight">“我喜欢你”</span><br>装进礼物里</h1>
-        <p class="hero-desc">每一份心意都值得被认真对待。<br>加密分享，仪式感开启，让喜欢更私密动人。</p>
-        <div class="btn-group">
-          <button class="btn-primary" onclick="alert('💌 喜欢已送达！去挑选你的第一份心意吧～')"><i class="fas fa-heart"></i> 探索心意</button>
-          <button class="btn-outline" onclick="alert('✨ 你的专属告白卡已生成！')"><i class="fas fa-pen-fade"></i> 定制告白</button>
+<div id="mainwrapper">
+  <header> 
+    <div id="logo"><img src="BlogPostAssets/images/logo.png" alt="sample logo" width="42"></div>
+    <p class="corner-hour-minute">return 0 已停止思考</p>
+    <!-- 右上角实时时钟插件 容器 -->
+    <div class="corner-clock-container">
+      <div class="clock-plugin-corner" id="liveClockCorner">
+        <div class="corner-date">
+          <span class="corner-full-date" id="cornerDate">加载中...</span>
+          <span class="corner-weekday" id="cornerWeekday">---</span>
+        </div>
+        <div class="corner-time">
+          <span class="corner-hour-minute" id="cornerHourMinute">--:--</span>
+          <span class="corner-separator">:</span>
+          <span class="corner-seconds" id="cornerSeconds">--</span>
+        </div>
+        <div class="corner-footer">
+          <span class="corner-timezone" id="cornerTimezone">🌍 时区</span>
+          <span><span class="live-dot-small"></span>实时</span>
         </div>
       </div>
-      <div class="hero-visual"><div class="floating-heart"><i class="fas fa-heart"></i></div><div style="text-align:center;">❤️ 仅为你心动</div></div>
+    </div>
+  </header>
+  <div id="content">
+    <div class="notOnDesktop"> 
+      <!-- 移动端搜索框 -->
+      <input type="text" placeholder="Search">
+    </div>
+    <section id="mainContent"> 
+      <h1>首个中文域名</h1>
+      <h3>只买得起一年😓</h3>
+      <div id="bannerImage"><img src="BlogPostAssets/images/SliderLayerImage.png" alt="" width="1000" height="490"/></div>
+      <p>这么好的域名竟然只要5.8一年！ </p>
+      <p>你甚至能免费看到这个</p>
+      <p>这太不可思议了😱&nbsp;</p>
+      
+      <!-- 作者信息区域 -->
+      <aside id="authorInfo"> 
+        <h2>Shiorko</h2>
+        <p>© 2026 Shiorko. All rights reserved.</p>
+        <p>Copyright © 2026 Shiorko. 保留所有权利。</p>
+      </aside>
     </section>
-    <div class="section-title"><i class="fas fa-fire-flame-curved"></i><span>本周热门 · 心意之选</span><i class="fas fa-heart" style="margin-left: auto;"></i></div>
-    <div class="product-grid">
-      <div class="product-card"><div class="product-icon"><i class="fas fa-envelope-open-text"></i></div><h3>心动信件</h3><p>手写温度 · 三行情书</p><div class="price">¥52.0 <small>心意价</small></div><button class="card-btn gift-btn" data-gift="心动信件" data-price="52.0" data-icon="envelope"><i class="fas fa-cart-plus"></i> 送给TA</button></div>
-      <div class="product-card"><div class="product-icon"><i class="fas fa-heart"></i></div><h3>永恒玫瑰</h3><p>永生花 · 不凋谢的爱</p><div class="price">¥131.4 <small>一生一世</small></div><button class="card-btn gift-btn" data-gift="永恒玫瑰" data-price="131.4" data-icon="heart"><i class="fas fa-cart-plus"></i> 送给TA</button></div>
-      <div class="product-card"><div class="product-icon"><i class="fas fa-calendar-alt"></i></div><h3>甜蜜约会</h3><p>专属策划 · 惊喜体验</p><div class="price">¥199.9 <small>预定浪漫</small></div><button class="card-btn gift-btn" data-gift="甜蜜约会" data-price="199.9" data-icon="calendar"><i class="fas fa-cart-plus"></i> 送给TA</button></div>
-      <div class="product-card"><div class="product-icon"><i class="fas fa-mug-hot"></i></div><h3>告白咖啡</h3><p>定制拉花 · 每日一杯喜欢</p><div class="price">¥36.6 <small>暖心</small></div><button class="card-btn gift-btn" data-gift="告白咖啡" data-price="36.6" data-icon="mug"><i class="fas fa-cart-plus"></i> 送给TA</button></div>
-    </div>
-    <div class="story-block"><div class="story-text"><h2><i class="fas fa-quote-left"></i> 喜欢，要说出来</h2><p>在「我喜欢你.shop」，我们不卖商品，只传递心意。<br>每一件礼物背后，都藏着一句未说出口的“我喜欢你”。</p><div class="story-highlight"><i class="fas fa-heart"></i> 已经有 <span id="gift-counter">12,847</span> 份喜欢从这里出发，下一份会是你的吗？</div><button class="btn-outline" id="readStoryBtn" style="margin-top:20px;"><i class="fas fa-book-open"></i> 阅读心动故事</button></div><div class="story-visual"><i class="fas fa-hand-holding-heart"></i><div>心意中转站</div></div></div>
+    <section id="sidebar"> 
+      <!-- 侧边栏内容 -->
+      <input type="text" placeholder="OMG 何意味">
+      <div id="adimage"><img src="BlogPostAssets/images/dog.gif" alt=""/></div>
+      <nav>
+        <ul>
+          <li><a href="#" title="Link">后续会加上别的东西</a></li>
+          <li><a href="#" title="Link"></a></li>
+          <li><a href="#" title="Link"></a></li>
+          <li><a href="#" title="Link"></a></li>
+          <li><a href="#" title="Link"></a></li>
+          <li><a href="#" title="Link"></a></li>
+        </ul>
+      </nav>
+    </section>
+    <footer> 
+      <article>
+        <h3>迪克期刊&nbsp;</h3>
+        <p>Dick Journal</p>
+        <p>Digital Innovation &amp; Collaborative Key</p>
+        <p>&nbsp;<a href="https://dick.shiorko.dpdns.org/" style="color:red">点我跳转</a></p>
+      </article>
+      <article>
+        <h3>主要介绍&nbsp;</h3>
+        <p>关于服务器配置和别的什么信息</p>
+        <p><a href="https://explanation.shiorko.dpdns.org/" style="color: rgba(0,233,255,1)">点我前往</a>&nbsp;</p>
+      </article>
+    </footer>
   </div>
-
-  <div id="panel-gifts" class="content-panel info-panel" style="display:none;"><h3><i class="fas fa-gift"></i> 全部心意礼</h3><p>🎁 心动信件 · 永恒玫瑰 · 甜蜜约会 · 告白咖啡 · 心动盲盒 ……</p><p>加密链接让爱意私密抵达，对方需要亲手开启礼物才能看到内容❤️</p><button class="btn-outline" onclick="switchPanel('home')">返回首页挑选</button></div>
-  <div id="panel-story" class="content-panel info-panel" style="display:none;"><h3><i class="fas fa-book-heart"></i> 心动故事集</h3><p id="storyDisplay">“第一次遇见你，风都是甜的。”</p><button class="btn-outline" id="changeStoryBtn" style="margin-top:16px;"><i class="fas fa-sync-alt"></i> 换一个故事</button><button class="btn-outline" style="margin-top:8px;" onclick="switchPanel('home')">返回首页</button></div>
-  <div id="panel-about" class="content-panel info-panel" style="display:none;"><h3><i class="fas fa-heart"></i> 关于「我喜欢你.shop」</h3><p>💡 这是一个传递心意的公益概念项目，所有展示均为虚拟心意。</p><p>🔐 分享链接经过加密，收礼人需要「亲手开启」才能看到惊喜内容与留言，仪式感满满。</p><button class="btn-outline" onclick="switchPanel('home')">返回首页</button></div>
-
-  <footer class="footer"><div><i class="fas fa-copyright"></i> 2026 我喜欢你.shop | <i class="fas fa-lock"></i> 加密心意 · 仪式开启</div><div style="margin-top:8px;"><i class="fab fa-weixin"></i> <i class="fab fa-weibo"></i> <i class="fab fa-instagram"></i> <span style="margin-left:12px;">💖 大声说出我喜欢你</span></div></footer>
+  <div id="footerbar"></div>
 </div>
 
-<!-- 收礼仪式感模态框 (未拆封/已拆封双状态) -->
-<div class="modal-overlay" id="giftModal">
-  <div class="modal-card" id="giftModalCard">
-    <div id="giftClosedView" class="gift-closed">
-      <div class="gift-box-icon"><i class="fas fa-gift"></i></div>
-      <div class="sender-label">✨ 一封心意正在等待开启 ✨</div>
-      <div class="sender-name" id="senderNamePreview">来自 一位朋友</div>
-      <button id="openGiftBtn" class="open-gift-btn"><i class="fas fa-heart"></i> 收下礼物 <i class="fas fa-arrow-right"></i></button>
-      <p style="font-size:0.8rem; opacity:0.7; margin-top:10px;">点击「收下礼物」方可查看内容</p>
-    </div>
-    <div id="giftOpenedView" class="gift-opened">
-      <div class="gift-icon-large" id="openedIcon"><i class="fas fa-gift"></i></div>
-      <div class="gift-name-display" id="openedGiftName">心动礼物</div>
-      <div class="gift-message-display" id="openedMessage">“ 我喜欢你 ”</div>
-      <div class="gift-from-display" id="openedFrom">💌 来自 特别的人</div>
-      <div class="gift-footer-buttons">
-        <button id="closeGiftModalBtn" class="btn-secondary"><i class="fas fa-check-circle"></i> 珍藏心意</button>
-        <button id="sendBackBtn" class="btn-secondary"><i class="fas fa-heart"></i> 我也送一份</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- 留言填写模态框（送礼时）- 样式已统一为圆润可爱风格 -->
-<div class="modal-overlay" id="messageModal">
-  <div class="modal-card">
-    <i class="fas fa-pen-heart"></i>
-    <h2>💌 写下专属心意</h2>
-    <label>💬 留言内容</label>
-    <textarea id="giftMessageInput" rows="2" placeholder="写下你想对TA说的话...">我喜欢你，从遇见你的那天起✨</textarea>
-    <label>🖊️ 署名</label>
-    <input type="text" id="giftFromInput" value="偷偷喜欢你的那个人">
-    <div style="margin-top: 28px; display: flex; gap: 12px;">
-      <button id="confirmSendBtn" class="modal-close-btn">✨ 生成加密链接 <i class="fas fa-link"></i></button>
-      <button id="cancelMsgBtn" class="modal-close-btn">取消</button>
-    </div>
-  </div>
-</div>
-
-<div class="toast-message" id="toast">✨ 加密链接已复制，快去分享吧</div>
-
+<!-- 实时时钟脚本 (紧凑右上角版，每秒更新) -->
 <script>
-  (function(){
-    // 加密 / 解密
-    function encryptData(obj){
-      const jsonStr = JSON.stringify(obj);
-      const base64 = btoa(unescape(encodeURIComponent(jsonStr)));
-      let reversed = base64.split('').reverse().join('');
-      reversed = reversed.replace(/=/g, '_').replace(/\+/g, '-').replace(/\//g, '~');
-      return reversed;
-    }
-    function decryptData(encoded){
-      try{
-        let reversed = encoded.replace(/_/g, '=').replace(/-/g, '+').replace(/~/g, '/');
-        reversed = reversed.split('').reverse().join('');
-        const decodedStr = decodeURIComponent(escape(atob(reversed)));
-        return JSON.parse(decodedStr);
-      }catch(e){ return null; }
+(function() {
+    // 获取右上角时钟各元素
+    const cornerDateElem = document.getElementById('cornerDate');
+    const cornerWeekdayElem = document.getElementById('cornerWeekday');
+    const cornerHourMinuteElem = document.getElementById('cornerHourMinute');
+    const cornerSecondsElem = document.getElementById('cornerSeconds');
+    const cornerTimezoneElem = document.getElementById('cornerTimezone');
+
+    // 辅助函数
+    function padZero(num) {
+        return num < 10 ? '0' + num : String(num);
     }
 
-    let currentGiftData = null;
-    let pendingDecryptedPayload = null;
+    const weekdaysCN = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
 
-    function generateEncryptedLink(giftName, price, icon, fromName, message){
-      const payload = { g: giftName, p: price, i: icon, f: fromName || "一位特别的朋友", m: message || "我喜欢你" };
-      const encData = encryptData(payload);
-      return `${window.location.origin}${window.location.pathname}?d=${encodeURIComponent(encData)}`;
-    }
-
-    function showMessageModal(giftData){
-      currentGiftData = giftData;
-      const msgModal = document.getElementById('messageModal');
-      document.getElementById('giftMessageInput').value = "想把全世界的美好都给你 💕";
-      document.getElementById('giftFromInput').value = "偷偷喜欢你的那个人";
-      msgModal.style.display = 'flex';
-    }
-    function closeMessageModal(){ document.getElementById('messageModal').style.display = 'none'; currentGiftData = null; }
-    
-    async function onConfirmSend(){
-      if(!currentGiftData) return;
-      const message = document.getElementById('giftMessageInput').value.trim() || "我喜欢你";
-      const fromName = document.getElementById('giftFromInput').value.trim() || "一位特别的朋友";
-      const { gift, price, icon } = currentGiftData;
-      const encryptedLink = generateEncryptedLink(gift, price, icon, fromName, message);
-      await copyWithAnimation(encryptedLink);
-      closeMessageModal();
+    function getFormattedDate(date) {
+        const year = date.getFullYear();
+        const month = padZero(date.getMonth() + 1);
+        const day = padZero(date.getDate());
+        return `${year}/${month}/${day}`;
     }
 
-    async function copyWithAnimation(text){
-      try{
-        await navigator.clipboard.writeText(text);
-        showToast('🔐 加密心意链接已复制！对方需要亲手开启才能看到内容 ❤️');
-      }catch(e){
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-        showToast('🔐 加密链接已复制，分享给TA');
-      }
-      createHeartRain();
-    }
-    function createHeartRain(){
-      for(let i=0;i<16;i++){
-        const heart = document.createElement('div');
-        heart.innerHTML = ['❤️','💖','💗','🌸','✨'][Math.floor(Math.random()*5)];
-        heart.className = 'confetti-heart';
-        heart.style.left = Math.random() * window.innerWidth + 'px';
-        heart.style.top = window.innerHeight - 50 + 'px';
-        heart.style.fontSize = (Math.random() * 20 + 16) + 'px';
-        document.body.appendChild(heart);
-        setTimeout(()=>heart.remove(), 1200);
-      }
-    }
-    function showToast(msg, dur=2500){
-      const toast = document.getElementById('toast');
-      toast.style.opacity = '1';
-      toast.innerText = msg;
-      setTimeout(()=> toast.style.opacity = '0', dur);
+    function getWeekday(date) {
+        return weekdaysCN[date.getDay()];
     }
 
-    // 收礼物逻辑
-    const giftModal = document.getElementById('giftModal');
-    const closedView = document.getElementById('giftClosedView');
-    const openedView = document.getElementById('giftOpenedView');
-    const senderNamePreview = document.getElementById('senderNamePreview');
-    const openBtn = document.getElementById('openGiftBtn');
-    
-    function openGiftAndReveal(payload){
-      const iconMap = { 'envelope':'fa-envelope-open-text', 'heart':'fa-heart', 'calendar':'fa-calendar-alt', 'mug':'fa-mug-hot' };
-      const iconClass = iconMap[payload.i] || 'fa-gift';
-      document.getElementById('openedIcon').innerHTML = `<i class="fas ${iconClass}"></i>`;
-      document.getElementById('openedGiftName').innerText = payload.g || '心动礼物';
-      document.getElementById('openedMessage').innerHTML = `“ ${payload.m || '我喜欢你'} ”`;
-      document.getElementById('openedFrom').innerHTML = `💌 来自 ${payload.f || '一位特别的朋友'}`;
-      closedView.style.display = 'none';
-      openedView.style.display = 'flex';
-      createHeartRain();
-      const card = document.getElementById('giftModalCard');
-      card.style.animation = 'none';
-      setTimeout(()=> card.style.animation = 'popIn 0.4s ease-out', 10);
+    function getHourMinute(date) {
+        return `${padZero(date.getHours())}:${padZero(date.getMinutes())}`;
     }
-    function resetModalToClosed(){
-      closedView.style.display = 'flex';
-      openedView.style.display = 'none';
+
+    function getSeconds(date) {
+        return padZero(date.getSeconds());
     }
-    window.closeGiftModal = function(){
-      giftModal.style.display = 'none';
-      resetModalToClosed();
-      if(window.history && window.history.replaceState){
-        const cleanUrl = window.location.origin + window.location.pathname;
-        window.history.replaceState({}, document.title, cleanUrl);
-      }
-      pendingDecryptedPayload = null;
-    };
-    function checkAndShowEncryptedGift(){
-      const params = new URLSearchParams(window.location.search);
-      const enc = params.get('d');
-      if(!enc) return false;
-      const data = decryptData(enc);
-      if(!data || !data.g) return false;
-      pendingDecryptedPayload = data;
-      senderNamePreview.innerText = `✨ 来自 ${data.f || '一位朋友'} ✨`;
-      resetModalToClosed();
-      giftModal.style.display = 'flex';
-      return true;
+
+    function getLocalTimeZoneShort() {
+        try {
+            const timeZoneName = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            if (timeZoneName) {
+                const offset = -new Date().getTimezoneOffset() / 60;
+                const sign = offset >= 0 ? '+' : '';
+                let offsetStr = `UTC${sign}${Math.abs(offset)}`;
+                if (offset % 1 !== 0) {
+                    const hours = Math.floor(Math.abs(offset));
+                    const mins = Math.abs((offset % 1) * 60);
+                    offsetStr = `UTC${sign}${hours}:${padZero(mins)}`;
+                }
+                let shortZone = timeZoneName.split('/').pop().replace(/_/g, ' ');
+                if (shortZone === 'Shanghai' || shortZone === 'Beijing') shortZone = '中国';
+                return `${shortZone} ${offsetStr}`;
+            } else {
+                const offset = -new Date().getTimezoneOffset();
+                const hours = Math.floor(Math.abs(offset) / 60);
+                const mins = Math.abs(offset) % 60;
+                const sign = offset >= 0 ? '+' : '-';
+                return `本地 UTC${sign}${padZero(hours)}:${padZero(mins)}`;
+            }
+        } catch(e) {
+            return "本地时区";
+        }
     }
-    openBtn.addEventListener('click', ()=>{
-      if(pendingDecryptedPayload) openGiftAndReveal(pendingDecryptedPayload);
-      else showToast('礼物信息不见了，请刷新重试', 1500);
+
+    // 更新右上角时钟
+    function updateCornerClock() {
+        const now = new Date();
+        if (cornerDateElem) cornerDateElem.textContent = getFormattedDate(now);
+        if (cornerWeekdayElem) cornerWeekdayElem.textContent = getWeekday(now);
+        if (cornerHourMinuteElem) cornerHourMinuteElem.textContent = getHourMinute(now);
+        if (cornerSecondsElem) cornerSecondsElem.textContent = getSeconds(now);
+    }
+
+    // 设置时区 (只需一次)
+    if (cornerTimezoneElem) {
+        cornerTimezoneElem.innerHTML = `🌐 ${getLocalTimeZoneShort()}`;
+    }
+
+    // 立即更新
+    updateCornerClock();
+    // 每秒刷新
+    let intervalId = setInterval(updateCornerClock, 1000);
+
+    // 页面关闭时清理定时器
+    window.addEventListener('beforeunload', function() {
+        if (intervalId) clearInterval(intervalId);
     });
-    document.getElementById('closeGiftModalBtn')?.addEventListener('click', closeGiftModal);
-    document.getElementById('sendBackBtn')?.addEventListener('click', ()=>{
-      closeGiftModal();
-      switchPanel('home');
-      setTimeout(()=> document.querySelector('.hero')?.scrollIntoView({behavior:'smooth'}), 100);
-    });
-    giftModal.addEventListener('click', (e) => { if(e.target === giftModal) closeGiftModal(); });
-    
-    // 送礼按钮绑定
-    function bindGiftButtons(){
-      document.querySelectorAll('.gift-btn').forEach(btn => {
-        btn.removeEventListener('click', giftClickHandler);
-        btn.addEventListener('click', giftClickHandler);
-      });
-    }
-    function giftClickHandler(e){
-      const btn = e.currentTarget;
-      const gift = btn.getAttribute('data-gift');
-      const price = btn.getAttribute('data-price');
-      const icon = btn.getAttribute('data-icon');
-      if(gift) showMessageModal({ gift, price, icon });
-    }
-    
-    // 导航
-    window.switchPanel = function(panelId){
-      document.querySelectorAll('.content-panel').forEach(p => p.style.display = 'none');
-      const target = document.getElementById('panel-'+panelId);
-      if(target) target.style.display = 'block';
-      document.querySelectorAll('.nav-item').forEach(a => a.classList.remove('active'));
-      if(document.querySelector(`.nav-item[data-page="${panelId}"]`)) document.querySelector(`.nav-item[data-page="${panelId}"]`).classList.add('active');
-      if(panelId === 'story'){
-        const stories = ["“第一次遇见你，风都是甜的。”","“我攒了好久的温柔和爱，现在全部给你。”","“你是我宇宙里最亮的那颗星。”","“想和你一起，看遍每一个日落。”","“喜欢就是，和你在一起时，我从不羡慕别人。”","“在‘我喜欢你.shop’里，我写下了你的名字。”"];
-        document.getElementById('storyDisplay').innerText = stories[Math.floor(Math.random()*stories.length)];
-      }
-    };
-    document.querySelectorAll('.nav-item').forEach(item => item.addEventListener('click', (e)=>{ e.preventDefault(); switchPanel(item.dataset.page); }));
-    document.getElementById('readStoryBtn')?.addEventListener('click', ()=> switchPanel('story'));
-    document.getElementById('changeStoryBtn')?.addEventListener('click', ()=>{
-      const stories = ["“第一次遇见你，风都是甜的。”","“我攒了好久的温柔和爱，现在全部给你。”","“你是我宇宙里最亮的那颗星。”","“想和你一起，看遍每一个日落。”","“喜欢就是，和你在一起时，我从不羡慕别人。”","“在‘我喜欢你.shop’里，我写下了你的名字。”"];
-      document.getElementById('storyDisplay').innerText = stories[Math.floor(Math.random()*stories.length)];
-    });
-    window.scrollToTop = function(){ window.scrollTo({top:0,behavior:'smooth'}); switchPanel('home'); };
-    
-    let count = 12847;
-    setInterval(()=>{ count += Math.floor(Math.random()*5)+1; if(document.getElementById('gift-counter')) document.getElementById('gift-counter').innerText = count.toLocaleString(); }, 8000);
-    
-    if(!localStorage.getItem('ilove_visited_v3')){
-      const charityDiv = document.createElement('div');
-      charityDiv.className = 'modal-overlay';
-      charityDiv.style.display = 'flex';
-      charityDiv.innerHTML = `<div class="modal-card"><i class="fas fa-hand-holding-heart" style="font-size:3rem;"></i><h2>❤️ 公益声明</h2><p style="margin:20px 0;">本网站为公益概念项目，所有价格仅为心意符号。<br>加密分享，亲手开启——让喜欢更浪漫。</p><button id="charityCloseBtn" class="modal-close-btn">我知道啦</button></div>`;
-      document.body.appendChild(charityDiv);
-      document.getElementById('charityCloseBtn')?.addEventListener('click',()=> charityDiv.remove());
-      localStorage.setItem('ilove_visited_v3', 'true');
-    }
-    
-    document.getElementById('confirmSendBtn')?.addEventListener('click', onConfirmSend);
-    document.getElementById('cancelMsgBtn')?.addEventListener('click', closeMessageModal);
-    document.getElementById('messageModal')?.addEventListener('click', (e)=> { if(e.target === document.getElementById('messageModal')) closeMessageModal(); });
-    bindGiftButtons();
-    checkAndShowEncryptedGift();
-    switchPanel('home');
-  })();
+})();
 </script>
 </body>
 </html>
